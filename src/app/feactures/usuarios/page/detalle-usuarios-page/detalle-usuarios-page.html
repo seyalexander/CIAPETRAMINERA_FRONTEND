@@ -1,0 +1,215 @@
+<p-dialog [(visible)]="visibleDetalle" [modal]="true" [style]="{ width: '58rem' }" [draggable]="false"
+    [resizable]="false" [closable]="true" styleClass="detalle-usuario-dialog" (onHide)="volverLista()">
+
+
+    <!-- HEADER -->
+    <ng-template pTemplate="header">
+        <div class="flex items-center gap-3">
+            <div>
+                <h4 class="my-0! text-xl font-bold">
+                    Detalle del usuario
+                </h4>
+
+                <span class="text-gray-500 text-sm">
+                    Información general y auditoría
+                </span>
+            </div>
+        </div>
+    </ng-template>
+
+    <!-- BODY -->
+    <div class="space-y-5">
+        <!-- PERFIL -->
+        <div class="p-5 bg-white">
+            <div class="grid grid-cols-12 gap-4 items-center">
+                <div class="col-span-12 md:col-span-8">
+                    <div class="flex items-center gap-4">
+                        <div class="w-20 h-20 rounded-full bg-blue-50 flex items-center justify-center">
+                            <span class="text-3xl font-bold text-blue-600">
+                                {{detalle.nombre?.charAt(0)}}{{detalle.apellido?.charAt(0)}}
+                            </span>
+                        </div>
+
+                        <div>
+                            <h2 class="text-2xl font-bold my-0!">
+                                {{detalle.nombre || '-'}}
+                                {{detalle.apellido || '-'}}
+                            </h2>
+
+                            <div class="flex gap-4 items-center">
+                                <p class="text-gray-500 my-0!">
+                                    <i class="pi pi-id-card mr-2"></i>
+                                    {{detalle.descripcionRol || '-'}}
+                                </p>
+
+                                <p-tag [value]="detalle.estado == 1 ? 'Activo':'Inactivo'"
+                                    [severity]="detalle.estado == 1 ? 'success':'danger'">
+                                </p-tag>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- INFORMACION -->
+        <div class="rounded-xl shadow-sm border border-gray-200 bg-white p-5">
+            <div class="flex items-center gap-2 mb-5">
+                <i class="pi pi-id-card text-blue-600"></i>
+
+                <h3 class="my-0! text-lg font-bold">
+                    Información del usuario
+                </h3>
+            </div>
+
+            <div class="grid grid-cols-12 gap-4">
+                <div class="col-span-12 md:col-span-6">
+                    <div class="info-item">
+                        <label>
+                            Nombre completo
+                        </label>
+                        <span>
+                            {{detalle.nombre}} {{detalle.apellido}}
+                        </span>
+                    </div>
+                </div>
+
+                <div class="col-span-12 md:col-span-6">
+                    <div class="info-item">
+                        <label>
+                            Rol
+                        </label>
+                        <span>
+                            {{detalle.descripcionRol || '-'}}
+                        </span>
+                    </div>
+                </div>
+
+                <div class="col-span-12 md:col-span-6">
+                    <div class="info-item">
+                        <label>
+                            Usuario
+                        </label>
+
+                        <span>
+                            {{detalle.usuario || '-'}}
+                        </span>
+                    </div>
+                </div>
+
+                <div class="col-span-6">
+                    <div class="info-item">
+                        <label>
+                            Contraseña
+                        </label>
+
+                        <span>
+                            {{detalle.passowrd || '-'}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- AUDITORIA -->
+        <div class="rounded-xl bg-white p-5">
+            <div class="flex items-center gap-2 mb-5">
+                <i class="pi pi-history text-blue-600"></i>
+
+                <h3 class="my-0! text-lg font-bold">
+                    Auditoría
+                </h3>
+            </div>
+
+            <div class="grid grid-cols-12 gap-4">
+                <div class="col-span-12 md:col-span-4">
+                    <div class="rounded-lg bg-green-50 p-4">
+
+                        <h4 class="font-bold text-green-700">
+                            Creación
+                        </h4>
+
+                        <p class="text-sm mt-3 mb-1">
+                            Usuario
+                        </p>
+
+                        <span class="font-medium">
+                            {{detalle.usuarioCreacion || '-'}}
+                        </span>
+
+                        <p class="text-sm mt-3 mb-1">
+                            Fecha
+                        </p>
+
+                        <span>
+                            {{detalle.fechaCreacion || '-'}}
+                        </span>
+                    </div>
+                </div>
+
+                <div class="col-span-12 md:col-span-4">
+                    <div class="rounded-lg bg-yellow-50 p-4">
+                        <h4 class="font-bold text-yellow-700">
+                            Edición
+                        </h4>
+
+                        <p class="text-sm mt-3 mb-1">
+                            Usuario
+                        </p>
+
+                        <span class="font-medium">
+                            {{detalle.usuarioEdicion || '-'}}
+                        </span>
+
+                        <p class="text-sm mt-3 mb-1">
+                            Fecha
+                        </p>
+
+                        <span>
+                            {{detalle.fechaEdicion || '-'}}
+                        </span>
+                    </div>
+                </div>
+
+                <div class="col-span-12 md:col-span-4">
+                    <div class="rounded-lg bg-red-50 p-4">
+
+                        <h4 class="font-bold text-red-700">
+                            Anulación
+                        </h4>
+
+                        <p class="text-sm mt-3 mb-1">
+                            Usuario
+                        </p>
+
+                        <span class="font-medium">
+                            {{detalle.usuarioAnulacion || '-'}}
+                        </span>
+
+                        <p class="text-sm mt-3 mb-1">
+                            Fecha
+                        </p>
+
+                        <span>
+                            {{detalle.fechaAnulacion || '-'}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- FOOTER -->
+
+    <ng-template pTemplate="footer">
+
+        <p-button label="Cerrar" icon="pi pi-times" severity="secondary" (click)="volverLista()">
+        </p-button>
+
+    </ng-template>
+
+
+</p-dialog>

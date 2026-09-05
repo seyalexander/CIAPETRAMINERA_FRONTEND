@@ -1,0 +1,74 @@
+<p-dialog [(visible)]="visibleEditar" [modal]="true" [style]="{ width: '32rem' }" [draggable]="false"
+    [resizable]="false" (onHide)="volverLista()">
+
+    <!-- HEADER -->
+    <ng-template #header>
+        <div class="flex align-items-center gap-3">
+            <div class="h-12 w-12 bg-yellow-100 text-yellow-700 p-2 rounded flex items-center justify-center">
+                <i class="pi pi-pencil text-lg"></i>
+            </div>
+
+            <div class="flex flex-col">
+                <span class="font-semibold text-lg">Editar Usuario</span>
+                <small class="text-500">Actualice la información</small>
+            </div>
+        </div>
+    </ng-template>
+
+    <!-- CONTENIDO -->
+    <div class="grid grid-cols-2 mt-8 gap-2 w-full">
+        
+        <h3 class="text-gray-400 my-0! col-span-2">Usuario</h3>
+        <div class="flex flex-col gap-1">
+            <label class="font-medium" for="documento">{{usuarioEditar.nombre}} {{usuarioEditar.apellido}}</label>
+        </div>
+        <p-divider class="col-span-2"/>
+        <h3 class="text-gray-400 my-0! col-span-2">Rol</h3>
+
+        <div class="flex flex-col gap-1">
+            <label class="font-medium" for="documento">Usuario</label>
+            <p-select [options]="roles" optionLabel="descripcion" optionValue="idRol"
+            [(ngModel)]="usuarioEditar.idRol" placeholder="Seleccione" appendTo="body">
+          </p-select>
+        </div>
+
+        <p-divider class="col-span-2"/>
+        <h3 class="text-gray-400 my-0! col-span-2">Credenciales</h3>
+        <div class="flex flex-col gap-1">
+            <label class="font-medium" for="documento">Usuario</label>
+            <input pInputText id="documento" [(ngModel)]="usuarioEditar.usuario" name="documento"
+                placeholder="Ej: 12345678" />
+        </div>
+        <div class="flex flex-col gap-1">
+            <label class="font-medium" for="password">Contraseña</label>
+            <p-password id="password" [(ngModel)]="usuarioEditar.passowrd" name="password" placeholder="Ej: 12345678"
+                [toggleMask]="true" [feedback]="false" styleClass="w-full">
+            </p-password>
+        </div>  
+
+        <p-divider class="col-span-2"/>
+        <h3 class="text-gray-400 my-0! col-span-2">Estado</h3>
+        <div class="card flex w-full p-0! mb-0!">
+        <div class="w-full flex flex-col">
+          <label class="font-medium">Estado</label>
+          <p-select [options]="estadosTipoDocumentos" optionLabel="label" optionValue="value"
+            [(ngModel)]="usuarioEditar.estado" placeholder="Seleccione" appendTo="body">
+          </p-select>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #footer>
+        <div class="flex justify-end items-center w-full">
+            <div class="flex gap-2">
+                <p-button label="Cancelar" icon="pi pi-times" severity="secondary" [text]="true"
+                    (click)="volverLista()">
+                </p-button>
+                <p-button label="Guardar" icon="pi pi-check" severity="info" [loading]="loading" (click)="editar()">
+                </p-button>
+            </div>
+        </div>
+    </ng-template>
+</p-dialog>
+
+<p-toast />

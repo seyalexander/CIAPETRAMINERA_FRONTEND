@@ -1,0 +1,182 @@
+<div class="flex flex-col gap-5 h-[calc(100dvh-160px)]">
+
+    <!-- Encabezado -->
+    <div class="flex flex-col">
+        <h1 class="mb-0!">Mi Perfil</h1>
+        <p class="text-gray-500">
+            Consulta la información de tu cuenta.
+        </p>
+    </div>
+
+    <div class="grid grid-cols-1 xl:grid-cols-3 gap-5">
+
+        <!-- Información principal -->
+        <div class="xl:col-span-1">
+
+            <p-card>
+
+                <ng-template pTemplate="content">
+
+                    <div class="flex flex-col items-center gap-4">
+
+                        <p-avatar
+                            label="A"
+                            size="xlarge"
+                            shape="circle">
+                        </p-avatar>
+
+                        <div class="text-center">
+
+                            <h2 class="mb-1">
+                                Alexander Cruz
+                            </h2>
+
+                            <p class="text-gray-500">
+                                Administrador
+                            </p>
+
+                        </div>
+
+                        <p-tag
+                            severity="success"
+                            value="Cuenta Activa">
+                        </p-tag>
+
+                    </div>
+
+                </ng-template>
+
+            </p-card>
+
+        </div>
+
+        <!-- Datos -->
+        <div class="xl:col-span-2">
+
+            <p-card>
+
+                <ng-template pTemplate="title">
+                    Información General
+                </ng-template>
+
+                <ng-template pTemplate="content">
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                        <div>
+                            <label class="font-semibold block mb-2">
+                                Nombres
+                            </label>
+
+                            <input
+                                pInputText
+                                class="w-full"
+                                value="Edwin Alexander"
+                                readonly>
+                        </div>
+
+                        <div>
+                            <label class="font-semibold block mb-2">
+                                Apellidos
+                            </label>
+
+                            <input
+                                pInputText
+                                class="w-full"
+                                value="Seclen yupanqui"
+                                readonly>
+                        </div>
+
+                        <div>
+                            <label class="font-semibold block mb-2">
+                                Usuario
+                            </label>
+
+                            <input
+                                pInputText
+                                class="w-full"
+                                value="easeclen"
+                                readonly>
+                        </div>
+
+                        <div>
+                            <label class="font-semibold block mb-2">
+                                Correo
+                            </label>
+
+                            <input
+                                pInputText
+                                class="w-full"
+                                value="alexander@empresa.com"
+                                readonly>
+                        </div>
+
+                        <div>
+                            <label class="font-semibold block mb-2">
+                                Rol
+                            </label>
+
+                            <input
+                                pInputText
+                                class="w-full"
+                                value="Administrador"
+                                readonly>
+                        </div>
+
+                        <div>
+                            <label class="font-semibold block mb-2">
+                                Último acceso
+                            </label>
+
+                            <input
+                                pInputText
+                                class="w-full"
+                                value="28/06/2026 09:15"
+                                readonly>
+                        </div>
+
+                    </div>
+
+                </ng-template>
+
+            </p-card>
+
+        </div>
+
+    </div>
+
+    <!-- Acciones -->
+    <p-card>
+
+        <ng-template pTemplate="title">
+            Acciones de la cuenta
+        </ng-template>
+
+        <ng-template pTemplate="content">
+
+            <div class="flex flex-wrap gap-3">
+
+                <p-button
+                    icon="pi pi-user-edit"
+                    label="Editar perfil">
+                </p-button>
+
+                <p-button
+                    icon="pi pi-key"
+                    label="Cambiar contraseña"
+                    severity="secondary">
+                </p-button>
+
+                <p-button
+                    icon="pi pi-shield"
+                    label="Ver actividad"
+                    severity="contrast">
+                </p-button>
+
+            </div>
+
+        </ng-template>
+
+    </p-card>
+
+</div>

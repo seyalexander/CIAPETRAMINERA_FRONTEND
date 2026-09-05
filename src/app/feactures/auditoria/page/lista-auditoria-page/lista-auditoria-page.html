@@ -1,0 +1,79 @@
+<div class="flex flex-col gap-4 h-[calc(100dvh-160px)]">
+
+    <!-- Encabezado -->
+    <div class="flex justify-between items-center">
+        <div class="flex flex-col">
+            <h1 class="mb-0!">Auditoría</h1>
+            <p class="text-gray-500">
+                Historial de acciones realizadas en el sistema.
+            </p>
+        </div>
+    </div>
+
+    <!-- Tabla -->
+    <p-table
+        [value]="auditorias"
+        dataKey="id"
+        stripedRows
+        responsiveLayout="scroll"
+        [tableStyle]="{'min-width':'90rem'}">
+
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width:70px;">ID</th>
+                <th>Usuario</th>
+                <th>Módulo</th>
+                <th>Acción</th>
+                <th>Descripción</th>
+                <th>Fecha</th>
+                <th>IP</th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-auditoria>
+
+            <tr>
+
+                <td>{{ auditoria.id }}</td>
+
+                <td>{{ auditoria.usuario }}</td>
+
+                <td>
+
+                    <p-tag
+                        severity="info"
+                        [value]="auditoria.modulo">
+                    </p-tag>
+
+                </td>
+
+                <td>
+
+                    <p-tag
+                        [severity]="auditoria.severity"
+                        [value]="auditoria.accion">
+                    </p-tag>
+
+                </td>
+
+                <td>{{ auditoria.descripcion }}</td>
+
+                <td>{{ auditoria.fecha }}</td>
+
+                <td>{{ auditoria.ip }}</td>
+
+            </tr>
+
+        </ng-template>
+
+        <ng-template pTemplate="emptymessage">
+            <tr>
+                <td colspan="7" class="text-center py-6">
+                    No existen registros de auditoría.
+                </td>
+            </tr>
+        </ng-template>
+
+    </p-table>
+
+</div>

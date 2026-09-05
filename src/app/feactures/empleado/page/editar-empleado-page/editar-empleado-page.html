@@ -1,0 +1,90 @@
+<p-dialog [(visible)]="visibleEditar" [modal]="true" [style]="{ width: '28rem' }" [draggable]="false"
+  [resizable]="false" (onHide)="volverLista()">
+
+  <!-- HEADER -->
+  <ng-template #header>
+    <div class="flex align-items-center gap-3">
+      <div class="h-12 w-12 bg-yellow-100 text-yellow-700 p-2 rounded flex items-center justify-center">
+        <i class="pi pi-pencil text-lg"></i>
+      </div>
+
+      <div class="flex flex-col">
+        <span class="font-semibold text-lg">Editar Empleado</span>
+        <small class="text-500">Actualice la información</small>
+      </div>
+    </div>
+  </ng-template>
+
+  <!-- CONTENIDO -->
+  <div class="grid grid-cols-2 mt-8 gap-2 w-full">
+    <div class="col-span-3 flex flex-col gap-4 mt-2">
+      <div class="flex flex-col gap-1">
+      <label class="font-medium">Tipo Documento</label>
+      <p-select [options]="tipoDocumentos" optionLabel="descripcion"  optionValue="idTipoDocumentos" [(ngModel)]="empleadoEditar.idTipoDocumento"
+        name="Tipo documento" placeholder="Seleccione tipo Documento" appendTo="body">
+      </p-select>
+    </div>
+    <div class="flex flex-col gap-1">
+      <label class="font-medium" for="documento">Documento</label>
+      <input pInputText id="documento"  [(ngModel)]="empleadoEditar.documento"
+        name="documento" placeholder="Ej: 12345678" />
+    </div>
+    <p-divider />
+    <h3 class="text-gray-400 my-0!">Datos generales</h3>
+    <div class="flex flex-col gap-1">
+      <label class="font-medium" for="rucEmpresa">Nombre</label>
+      <input pInputText id="rucEmpresa" [(ngModel)]="empleadoEditar.nombre" name="rucempresa"
+        placeholder="Ej: Edwin " />
+    </div>
+
+    <div class="flex flex-col gap-1">
+      <label class="font-medium" for="razonSocial">Apellido</label>
+      <input pInputText id="razonSocial" [(ngModel)]="empleadoEditar.apellido" name="razonSocial"
+        placeholder="Ej: Seclen" />
+    </div>
+
+
+
+    <div class="flex flex-col gap-1">
+      <label class="font-medium" for="documento">Fecha Nacimiento</label>
+      <p-datepicker appendTo="body" [(ngModel)]="empleadoEditar.fechaNacimiento" placeholder="Normal" showIcon
+        iconDisplay="input" />
+    </div>
+
+    <p-divider />
+
+    <h3 class="text-gray-400 my-0!">Datos de contacto</h3>
+
+    <div class="col-span-2 flex flex-col gap-1">
+      <label class="font-medium" for="razonSocial">Teléfono</label>
+      <input pInputText pInputMask="999-999-999" [(ngModel)]="empleadoEditar.telefono" placeholder="999-999-999" />
+    </div>
+
+    <p-divider />
+
+    <h3 class="text-gray-400 my-0!">Datos extras</h3>
+
+    <div class="flex flex-col gap-1">
+        <label class="font-medium" for="fechaIngreso">Fecha Ingreso</label>
+        <p-datepicker id="fechaIngreso" appendTo="body" [(ngModel)]="empleadoEditar.fechaIngreso" placeholder="Normal" showIcon
+          iconDisplay="input" />
+      </div>
+    </div>
+
+
+
+  </div>
+
+  <ng-template #footer>
+    <div class="flex justify-end items-center w-full">
+      <div class="flex gap-2">
+        <p-button label="Cancelar" icon="pi pi-times" severity="secondary" [text]="true" (click)="volverLista()">
+        </p-button>
+        <p-button label="Guardar" icon="pi pi-check" severity="info" [loading]="loading" (click)="editar()">
+        </p-button>
+      </div>
+    </div>
+  </ng-template>
+</p-dialog>
+
+<p-toast />

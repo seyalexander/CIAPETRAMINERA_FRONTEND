@@ -1,0 +1,121 @@
+<p-dialog [(visible)]="visibleDetalle" [modal]="true" [style]="{ width: '42rem' }" [closable]="true"
+    (onHide)="volverLista()">
+
+    <!-- HEADER -->
+    <ng-template #header>
+        <div class="flex align-items-center gap-3">
+            <div class="bg-primary-100 text-primary p-2 border-round">
+                <i class="pi pi-id-card text-lg"></i>
+            </div>
+            <div class="flex flex-col">
+                <span class="font-semibold text-lg">Detalle Tipo Documento</span>
+                <small class="text-500">Información completa del registro</small>
+            </div>
+        </div>
+    </ng-template>
+
+    <!-- CONTENIDO -->
+    <div class="grid grid-cols-2 gap-4 mt-3 ">
+
+        <!-- DATOS GENERALES -->
+        <div class="col-span-1 shadow rounded p-4 surface-card bg-gray-50">
+
+            <div class="flex items-center gap-2 mb-3">
+                <i class="pi pi-info-circle text-primary"></i>
+                <span class="font-semibold">Datos Generales</span>
+            </div>
+
+            <div class="grid grid-cols-6">
+
+                <div class="col-span-6 mb-3">
+                    <small class="text-500 block">Descripción</small>
+                    <span class="font-medium text-900">{{ detalle.descripcion || '-'}}</span>
+                </div>
+
+                <div class="col-span-6 mb-3">
+                    <small class="text-500 block">Código SUNAT</small>
+                    <span class="font-medium">{{ detalle.codigoSunat || '-' }}</span>
+                </div>
+
+                <div class="col-span-6 mb-3">
+                    <small class="text-500 block">Longitud</small>
+                    <span class="font-medium">
+                        {{ detalle.longitudMin || '-' }} - {{ detalle.longitudMax || '-' }}
+                    </span>
+                </div>
+
+                <div class="col-span-6 mb-3">
+                    <small class="text-500 block">Tipo Caracter</small>
+                    <span class="font-medium">{{ detalle.descripcionTipoCaracter || '-' }}</span>
+                </div>
+
+                <div class="col-span-6">
+                    <small class="text-500 block">Estado</small>
+                    <p-badge [value]="detalle.estado == 1 ? 'Activo' : 'Inactivo'"
+                        [severity]="detalle.estado == 1 ? 'success' : 'danger'">
+                    </p-badge>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- AUDITORÍA -->
+        <div class="col-span-1 shadow-2 border-round p-4 surface-card">
+
+            <div class="flex items-center gap-2 mb-3">
+                <i class="pi pi-clock text-primary"></i>
+                <span class="font-semibold">Auditoría</span>
+            </div>
+
+            <div class="grid grid-cols-2 gap-2">
+
+                <div class="col-span-2 mb-3">
+                    <small class="text-500 block">Usuario Creación</small>
+                    <span class="font-medium">{{ detalle.usuarioCreacion || '-' }}</span>
+                </div>
+
+                <div class="col-span-2 mb-3">
+                    <small class="text-500 block">Fecha Creación</small>
+                    <span class="font-medium">{{ detalle.fechaCreacion || '-' }}</span>
+                </div>
+
+                <p-divider class="col-span-2 mb-3" />
+
+                <div class="col-span-2 mb-3">
+                    <small class="text-500 block">Usuario Edición</small>
+                    <span class="font-medium">{{ detalle.usuarioEdicion || '-' }}</span>
+                </div>
+
+                <div class="col-span-2 mb-3">
+                    <small class="text-500 block">Fecha Edición</small>
+                    <span class="font-medium">{{ detalle.fechaEdicion || '-' }}</span>
+                </div>
+
+                <p-divider class="col-span-2 mb-3" />
+
+                <div class="col-span-2">
+                    <small class="text-500 block">Usuario Anulación</small>
+                    <span class="font-medium">{{ detalle.usuarioAnulacion || '-' }}</span>
+                </div>
+
+                <div class="col-span-2">
+                    <small class="text-500 block">Fecha Anulación</small>
+                    <span class="font-medium">{{ detalle.fechaAnulacion || '-' }}</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <ng-template #footer>
+        <div class="flex justify-content-end">
+            <p-button label="Cerrar" icon="pi pi-times" severity="secondary" (click)="volverLista()">
+            </p-button>
+        </div>
+    </ng-template>
+
+</p-dialog>

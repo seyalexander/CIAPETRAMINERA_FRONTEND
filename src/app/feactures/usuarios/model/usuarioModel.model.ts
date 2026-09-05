@@ -1,0 +1,21 @@
+export class UsuarioModel {
+  idUsuario: number = 0
+  idEmpresa: number = 0
+  usuario: string = ''
+  passowrd: string = ''
+  estado: number = 0
+  idRol: number = 0
+  descripcionRol: string = ''
+  idEmpleado: number = 0
+  nombre: string = ''
+  apellido: string = ''
+  fechaCreacion: string = ''
+  fechaEdicion: string = ''
+  fechaAnulacion: string = ''
+  idUsuarioCreacion: number = 0
+  idUsuarioEdicion: number = 0
+  idUsuarioAnulacion: number = 0
+  usuarioCreacion: string = ''
+  usuarioEdicion: string = ''
+  usuarioAnulacion: string = ''
+}

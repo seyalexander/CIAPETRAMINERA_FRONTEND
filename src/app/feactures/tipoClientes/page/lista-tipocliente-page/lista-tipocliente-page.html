@@ -1,0 +1,98 @@
+<div class="flex flex-col gap-4 h-[calc(100dvh-160px)]">
+  <div class="card rounded overflow-hidden">
+    <p-table #dt2 [value]="tipoClientes" 
+    [tableStyle]="{ 'min-width': '60rem' }"
+    [globalFilterFields]="['descripcion']"
+    [paginator]="true"
+    [rows]="10"
+    [scrollable]="true"
+    scrollHeight="flex"
+    [rowsPerPageOptions]="[10,20,50,100]"
+    [showCurrentPageReport]="true"
+    paginatorDropdownAppendTo="body">
+      <ng-template #caption>
+        <div class="flex items-center justify-between">
+          <span class="text-xl font-bold">Tipos Clientes</span>
+
+          <p-iconfield iconPosition="left" class="w-20rem">
+            <p-inputicon>
+              <i class="pi pi-search"></i>
+            </p-inputicon>
+
+            <input type="text" pInputText placeholder="Buscar por descripción, código..."
+              (input)="dt2.filterGlobal($any($event.target).value, 'contains')" />
+            <p-splitbutton *ngIf="puedeCrear()" class="ml-2" (onClick)="showDialog()" icon="pi pi-plus" label="Nuevo"
+              [model]="items" />
+          </p-iconfield>
+
+        </div>
+
+      </ng-template>
+      <ng-template #header>
+        <tr>
+          <th>#</th>
+          <th>Descripción</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </ng-template>
+      <ng-template #body let-item let-rowIndex="rowIndex">
+
+        <tr *ngIf="loading">
+          <td><p-skeleton width="2rem"></p-skeleton></td>
+          <td><p-skeleton width="10rem"></p-skeleton></td>
+          <td><p-skeleton width="8rem"></p-skeleton></td>
+          <td><p-skeleton width="8rem"></p-skeleton></td>
+        </tr>
+
+        <tr *ngIf="!loading">
+          <td>{{ rowIndex + 1 }}</td>
+          <td>{{ item.descripcion }}</td>
+          <td><p-tag [value]="item.estado == 1 ? 'Activo' : 'Inactivo'" badgeSize="xlarge"
+              [severity]="item.estado == 1 ? 'success' : 'danger'" /> </td>
+          <td>
+            <div class="flex gap-2">
+
+              <p-confirmpopup />
+              <p-button icon="pi pi-eye" pTooltip="Ver detalle" [rounded]="true" [outlined]="true"
+                (onClick)="showDialogDetalle(item)" severity="info"></p-button>
+              <p-button icon="pi pi-pencil" pTooltip="Editar" [rounded]="true" [outlined]="true"
+                (onClick)="showDialogEditar(item)" severity="info"></p-button>
+              <p-button [icon]="item.estado == 1 ? 'pi pi-trash' : 'pi pi-check'"
+                [severity]="item.estado == 1 ? 'danger' : 'success'"
+                [pTooltip]="item.estado == 1 ? 'Eliminar' : 'Activar'" [rounded]="true" [outlined]="true" (onClick)="item.estado == 1
+    ? ConfirmacionAnular($event, item)
+    : ConfirmacionActivar($event, item)">
+              </p-button>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template #emptymessage>
+        <tr>
+          <td colspan="14">
+            <div class="flex flex-col items-center justify-center py-6 text-gray-500">
+              <i class="pi pi-inbox text-4xl mb-3"></i>
+              <span class="text-lg font-semibold">No hay tipos de clientes registrados</span>
+              <span class="text-sm">Intenta crear uno nuevo</span>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template #footer>
+        <tr>
+          <td colspan="14">Total datos registrados: {{ tipoClientes ? tipoClientes.length : 0 }} tipos de
+            documentos.
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+
+  <p-toast />
+
+  <!-- <app-registro-tipo-documentos-page [(visible)]="visible" (onRegistroExitoso)="refrescarLista()" />
+  <app-detalle-tipo-documentos-page [(visibleDetalle)]="visibleDetalle" [detalle]="detalleTipoDocumentosPage" />
+  <app-editar-tipo-documentos-page [(visibleEditar)]="visibleEditar" (onEditarExitoso)="refrescarLista()"
+  [tipoDocumento]="detalleTipoDocumentosPage" /> -->
+  

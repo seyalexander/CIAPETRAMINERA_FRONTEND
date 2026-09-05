@@ -1,0 +1,87 @@
+<div class="min-h-screen flex items-center justify-center bg-linear-to-br from-[#F6F8FC] via-[#EEF2F7] to-[#E9EEF6] overflow-hidden relative">
+
+  <div class="absolute w-150 h-150 bg-indigo-300/20 blur-[120px] rounded-full -top-50 -left-50"></div>
+  <div class="absolute w-150 h-150 bg-cyan-300/20 blur-[120px] rounded-full -bottom-50 -right-50"></div>
+
+  @if(!apiError) {
+
+    <div class="relative w-[95%] max-w-5xl rounded-3xl overflow-hidden shadow-2xl grid grid-cols-1 md:grid-cols-2 border border-gray-200/60 bg-white/70 backdrop-blur-xl">
+
+      <div class="p-10 md:p-14 bg-linear-to-br from-indigo-500/10 to-cyan-400/10 flex flex-col justify-between">
+
+        <div>
+          <h1 class="text-3xl font-bold text-gray-800">Mi Empresa</h1>
+          <p class="text-gray-500 mt-2">Sistema de gestión inteligente</p>
+        </div>
+
+        <div class="text-gray-400 text-sm">
+          Control, eficiencia y automatización en un solo lugar
+        </div>
+
+      </div>
+
+      <form
+        class="p-10 md:p-14 bg-white/60"
+        [formGroup]="form"
+        (ngSubmit)="onSubmit()"
+        autocomplete="off">
+
+        <h2 class="text-3xl font-semibold text-gray-800">Bienvenido</h2>
+        <p class="text-gray-500 mt-2">Ingresa tus credenciales para continuar</p>
+
+        <div class="mt-8 space-y-5">
+
+          <div>
+            <label class="text-gray-600 text-sm">Usuario</label>
+            <input
+              placeholder="usuario@empresa.com"
+              type="text"
+              formControlName="username"
+              class="mt-2 w-full px-4 py-3 rounded-xl bg-white border border-gray-200 text-gray-800 outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-200 transition"
+            />
+          </div>
+
+          <div>
+            <label class="text-gray-600 text-sm">Password</label>
+
+            <input
+              placeholder="********"
+              type="password"
+              formControlName="password"
+              class="mt-2 w-full px-4 py-3 rounded-xl bg-white border border-gray-200 text-gray-800 outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-200 transition"
+            />
+          </div>
+
+          @if(loginError) {
+            <div class="text-sm text-red-500 bg-red-50 border border-red-200 p-3 rounded-lg">
+              {{ loginError }}
+            </div>
+          }
+
+          <button
+            type="submit"
+            [disabled]="loading"
+            class="w-full py-3 rounded-xl bg-cyan-500 hover:bg-cyan-400 disabled:opacity-60 text-white font-semibold transition">
+
+            {{ loading ? 'Ingresando...' : 'Ingresar' }}
+          </button>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  }
+
+  @if(apiError) {
+
+    <app-error
+      class="absolute z-90"
+      [mensajeError]="'No se pudo conectar con el servidor'"
+      (volver)="volverLogin()">
+    </app-error>
+
+  }
+
+</div>

@@ -1,0 +1,48 @@
+<p-dialog [(visible)]="visible" [modal]="true" (onHide)="volverLista()" [style]="{ width: '28rem' }">
+  <ng-template #header>
+    <div class="flex items-center gap-2">
+      <i class="pi pi-id-card text-xl text-primary"></i>
+      <span class="font-semibold text-lg">Registrar Unidad de Medida</span>
+    </div>
+  </ng-template>
+
+  <div class="flex flex-col gap-4 mt-2">
+
+    <!-- DESCRIPCIÓN -->
+    <div class="flex flex-col gap-1">
+      <label class="font-medium">Descripción</label>
+      <input pInputText
+             [(ngModel)]="unidadMedida.descripcion"
+             name="descripcion"
+             placeholder="Ej: UNIDAD" />
+    </div>
+
+    <!-- CÓDIGO SUNAT -->
+    <div class="flex flex-col gap-1">
+      <label class="font-medium">Código SUNAT</label>
+      <input pInputText
+             [(ngModel)]="unidadMedida.siglas"
+             name="codigoSunat"
+             placeholder="Ej: UNI"
+           />
+    </div>
+
+  </div>
+
+  <ng-template #footer>
+    <div class="flex justify-end gap-2">
+
+      <p-button label="Cancelar" icon="pi pi-times" severity="secondary"
+        [text]="true" (click)="volverLista()">
+      </p-button>
+
+      <p-button label="Guardar" icon="pi pi-check" severity="success"
+        (click)="guardar()">
+      </p-button>
+
+    </div>
+  </ng-template>
+
+</p-dialog>
+
+ <p-toast />

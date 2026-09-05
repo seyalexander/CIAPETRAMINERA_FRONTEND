@@ -1,0 +1,52 @@
+<p-dialog header="Registrar documento" [(visible)]="visible" [modal]="true" [style]="{ width: '38rem' }"
+    (onHide)="cerrarModal()">
+
+    <div class="flex flex-col gap-5">
+
+        <!-- Proceso -->
+        <div>
+            <label class="font-semibold mb-2 block">
+                Proceso
+            </label>
+
+            <input placeholder="Nombre Proceso" pInputText [value]="procesoSeleccionado.nombre" readonly class="w-full">
+        </div>
+
+        <!-- Archivo -->
+        <div>
+            <label class="font-semibold mb-2 block">
+                Documento
+            </label>
+
+            <p-fileUpload mode="basic" chooseLabel="Seleccionar documento" chooseIcon="pi pi-upload" [auto]="false"
+                accept=".pdf,.doc,.docx,.xls,.xlsx" (onSelect)="seleccionarArchivo($event)">
+            </p-fileUpload>
+        </div>
+
+        <!-- Nombre -->
+        <div>
+            <label class="font-semibold mb-2 block">
+                Nombre detectado
+            </label>
+
+            <input placeholder="Nombre archivo" pInputText [value]="nombreArchivo" readonly class="w-full">
+        </div>
+
+        <!-- Versión -->
+        <div class="flex items-center gap-3">
+            <span class="font-semibold">
+                Versión
+            </span>
+            <p-tag severity="info" [value]="'v' + versionSiguiente">
+            </p-tag>
+        </div>
+    </div>
+
+    <ng-template pTemplate="footer">
+        <p-button label="Cancelar" severity="secondary" (click)="cerrarModal()">
+        </p-button>
+        <p-button label="Registrar" icon="pi pi-check" (click)="guardar()">
+        </p-button>
+    </ng-template>
+
+</p-dialog>

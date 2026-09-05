@@ -1,0 +1,136 @@
+<div class="flex flex-col gap-4 h-[calc(100dvh-160px)]">
+    <div class="col-span-12">
+        <h1 class="mb-0!">Documentos</h1>
+        <p class="text-gray-500">Apartado par la gestión de tus documentos</p>
+    </div>
+
+    <div class="grid grid-cols-12 gap-6 h-full">
+        <div class="col-span-12 lg:col-span-3">
+            <div class="bg-white rounded-2xl shadow p-4 h-full">
+
+                <!-- Search procesos -->
+                <p-iconfield>
+                    <p-inputicon class="pi pi-search" />
+                    <input type="text" pInputText placeholder="Buscar proceso" [(ngModel)]="searchProceso"
+                        class="w-full" />
+                </p-iconfield>
+
+                <h5 class="text-gray-500! text-sm my-2!">Procesos</h5>
+
+                <div class="space-y-2 overflow-y-auto h-[calc(100dvh-350px)]">
+
+                    <div *ngFor="let p of procesosFiltrados()" (click)="selectProceso(p)"
+                        class="flex items-center justify-between p-3 rounded-xl cursor-pointer transition hover:bg-cyan-50"
+                        [ngClass]="{ 'bg-cyan-100': p.id === procesoSeleccionado?.id }">
+
+                        <div class="flex items-center gap-2">
+                            <i class="pi pi-folder text-cyan-600"></i>
+                            <span class="text-sm font-medium text-gray-700">{{ p.nombre }}</span>
+                        </div>
+
+                        <span class="text-xs bg-cyan-600 text-white px-2 py-1 rounded-full">
+                            {{ p.total }}
+                        </span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-span-12 lg:col-span-9">
+
+            <!-- HEADER -->
+            <div class="flex items-center justify-between mb-2">
+                <div>
+                    <p class="text-gray-500 text-sm mb-0!">
+                        Seleccionado:
+                    </p>
+                    <h2 class="text-2xl font-semibold text-gray-800 my-0!"> {{ procesoSeleccionado?.nombre ||
+                        "NINGUNO"}}</h2>
+                </div>
+
+                <!-- FILTERS -->
+                <div class="flex flex-wrap gap-3 items-end">
+
+                    <p-iconfield>
+                        <p-inputicon class="pi pi-search" />
+                        <input type="text" pInputText placeholder="Buscar documento"
+                            (input)="dt.filterGlobal($event.target.value, 'contains')" />
+                    </p-iconfield>
+
+                    <p-select [options]="tiposDoc" [(ngModel)]="tipoSeleccionado" optionLabel="label"
+                        placeholder="Tipo Doc." />
+
+                    <p-button class=" text-white rounded-xl flex items-center gap-2" (click)="mostrarRegistroDocumento()">
+                        <i class="pi pi-plus"></i>
+                        Nuevo
+                    </p-button>
+                </div>
+
+
+            </div>
+
+            <div class="card">
+                <p-table #dt [value]="documentos" styleClass="tabla-sucursales" [tableStyle]="{ 'min-width': '50rem' }"
+                    [paginator]="true" [rowsPerPageOptions]="[5, 10, 20]" [rows]="5" [scrollable]="true"
+                    scrollHeight="calc(100dvh - 420px)" [paginatorDropdownAppendTo]="'body'" [globalFilterFields]="['codigo', 'descripcion', 'fecha', 'estado', 'version']">
+                    <ng-template #header>
+                        <tr>
+                            <th class="px-6 py-4">#</th>
+                            <th class="px-6 py-4">Descripción</th>
+                            <th class="px-6 py-4">Fecha</th>
+                            <th class="px-6 py-4 text-center">Estado</th>
+                            <th class="px-6 py-4 text-center">Versión</th>
+                            <th class="px-6 py-4 text-center">Acciones</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template #body let-documento>
+                        <tr>
+                            <td>
+                                <div class="flex items-center gap-2 ">
+                                    {{documento.codigo}}
+                                </div>
+                            </td>
+                            <td>{{documento.descripcion}}</td>
+                            <td>
+                                <span
+                                    class="flex items-center justify-between gap-2 text-sm font-mono text-gray-700 select-all">
+                                    {{documento.fecha}}
+                                </span>
+                            </td>
+                            <td>
+                                <p-tag [value]="documento.estado == '1' ? 'Activo':'Inactivo'" [severity]="documento.estado == '1' ? 'success':'danger'" />
+                            </td>
+                            <td>
+                                <span
+                                    class="flex items-center justify-between gap-2 text-sm font-mono text-gray-700 select-all">
+                                    {{documento.version}}
+                                </span>
+                            </td>
+                            <td>
+
+                                <div class="flex text-right gap-2">
+                                    <p-button icon="pi pi-eye" [rounded]="true" [text]="true" [raised]="true"
+                                        severity="info" />
+                                    <p-button icon="pi pi-pencil" [rounded]="true" [text]="true" [raised]="true" severity="secondary"  (click)="editarDocumento($event,documento)"/>
+                                    <p-button icon="pi pi-times" [rounded]="true" [text]="true" [raised]="true"
+                                        severity="danger" *ngIf="documento.estado == '1'" />
+                                    <p-button icon="pi pi-refresh" [rounded]="true" [text]="true" [raised]="true"
+                                        severity="warn" *ngIf="documento.estado == '0'" />
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+<app-registro-documentos-page  [visible]="showRegistro" (visibleChange)="showRegistro = $event"/>
+
+<p-toast />
+<p-confirmdialog />
