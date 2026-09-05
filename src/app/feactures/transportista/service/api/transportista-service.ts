@@ -1,24 +1,24 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../../../environments/environment';
-import { RequestListaClientes } from '../../intercambios/request/RequestListaClientes.request';
-import { Observable } from 'rxjs';
-import { ResponseListaClientes } from '../../intercambios/response/ResponseListaClientes.response';
+import { RequestListaTransportistas } from '../../intercambios/request/RequestListaTransportistas.request';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { ResponseListaTransportista } from '../../intercambios/response/ResponseListaTransportistas.response';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ClienteService {
+export class TransportistaService {
   private readonly url = environment.api;
 
-  public ListarClientes(req: RequestListaClientes): Observable<ResponseListaClientes> {
+  public ListarTransportistas(req: RequestListaTransportistas): Observable<ResponseListaTransportista> {
     let params = new HttpParams();
 
     if (req.estado !== undefined) {
       params = params.set('estado', req.estado);
     }
 
-    return this.httpClient.get<ResponseListaClientes>(`${this.url}/v1/clientes`, {
+    return this.httpClient.get<ResponseListaTransportista>(`${this.url}/v1/transportista`, {
       params,
     });
   }
